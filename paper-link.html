@@ -1,0 +1,112 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../paper-button/paper-button.html">
+
+<!--
+`paper-link`
+a paper style link that can be used to open a link in a new browser tab.
+Sometimes it is useful to open pages in a new browser tab to keep the 
+current page unchanged. The `paper-link` is an easy option to do this.
+
+    <paper-link url="https://www.google.com">Google</paper-link>
+  
+It can also have an icon, defined by attribute `icon` or `src`:
+
+    <paper-link icon="polymer" url="https://https://elements.polymer-project.org">Polymer</paper-link>
+    <paper-link src="demo.png" url="https://www.google.com">Google</paper-link>
+
+### Styling
+
+Style the button with CSS for the paper-button mixin.
+
+    paper-link.red
+    {
+      --paper-button:
+      {
+        background: red;
+        color: yellow;
+      };
+    }
+
+The following mixins are available for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--paper-button` | Mixin applied to the paper-button | `{}`
+`--icon-icon` | Mixin applied to the iron-icon | `{}`
+
+@group Paper Elements
+@element paper-button
+@demo demo/index.html 
+-->
+
+<dom-module id="paper-link">
+  <template>
+    <style>
+      :host
+      {
+        display: block;
+      }
+      paper-button
+      {
+        @apply(--paper-button);
+      }
+      iron-icon
+      {
+        margin-right: 0.5em;
+        @apply(--iron-icon);
+      }
+    </style>
+    <paper-button raised={{raised}} disabled={{disabled}} on-tap="tapButton">
+      <template is="dom-if" if="{{icon}}">
+        <iron-icon icon="{{icon}}"></iron-icon>
+      </template>
+      <template is="dom-if" if="{{src}}">
+        <iron-icon src="{{src}}"></iron-icon>
+      </template>
+      <content></content>
+    </paper-button>
+  </template>
+
+  <script>
+    Polymer(
+    {
+      is: 'paper-link',
+
+      properties: 
+      {
+        /**
+         * If true, the user cannot interact with this element.
+         */
+        disabled: {type: Boolean, value: false},
+        /**
+         * The name of the icon to use. The name should be of the form:
+         * `iconset_name:icon_name`.
+         */
+        icon: {type: String, value: undefined},
+        /**
+         * If true, the link should be styled with a shadow.
+         */
+        raised: {type: Boolean, value: false},
+        /**
+         * If using iron-icon without an iconset, you can set the src to be
+         * the URL of an individual icon image file. Note that this will take
+         * precedence over a given icon attribute.
+         */
+        src: {type: String, value: undefined},
+        /**
+         * The url that should be opened in a new window, when this link is clicked.
+         */
+        url: {type: String, value: ""}
+      },
+      /**
+       * Executed when the button is clicked.
+       */
+      tapButton: function()
+      {
+        window.open(this.url,"_blank");
+      }
+    });
+  </script>
+</dom-module>
