@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+  <head>
+    <title>paper-link demo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+
+    <link rel="import" href="../paper-link.html">
+
+    <style is="custom-style" include="demo-pages-shared-styles">
+      paper-link
+      {
+        padding: 0.5em 0;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="vertical-section-container centered">
+      <h3>Basic paper-link Demo</h3>
+      <demo-snippet>
+        <template>
+          <style is="custom-style">
+            paper-link.wide
+            {
+              @apply(--layout);
+              @apply(--layout-flex);
+              --paper-button:
+              {
+                @apply(--layout-flex);
+                @apply(--layout-justified);
+              };
+            }
+            paper-link.red
+            {
+              --paper-button:
+              {
+                background: red;
+                color: yellow;
+              };
+            }
+            paper-link.red[disabled]
+            {
+              --paper-button:
+              {
+                background: #ff9090;
+                color: #ffff90;
+              };
+            }
+            .panel
+            {
+              @apply(--layout-horizontal);
+            }
+          </style>
+          <paper-link icon="polymer" url="https://elements.polymer-project.org">Polymer Elements</paper-link>
+          <paper-link class="wide" raised src="demo.png" url="https://www.google.com" elevation="5">Google Search</paper-link>
+          <div class="panel">
+            <paper-link class="red" disabled url="https://www.google.com">Google Search (disabled)</paper-link>
+            <paper-link class="red" url="https://www.google.com">Google Search</paper-link>
+          </div>
+        </template>
+      </demo-snippet>
+    </div>
+
+  </body>
+</html>
